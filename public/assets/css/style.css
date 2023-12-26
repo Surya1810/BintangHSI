@@ -1,0 +1,89 @@
+* {
+    scroll-behavior: smooth;
+    font-family: "Poppins", sans-serif;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+html {
+    height: -webkit-fill-available;
+}
+body {
+    height: 100svh;
+    height: -webkit-fill-available;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    background: #0195a5;
+}
+
+::selection {
+    background: #0195a5;
+}
+
+.form-control:focus {
+    border-color: rgba(24, 30, 66, 0.75);
+    box-shadow: 0 0 0 0.2rem rgba(24, 30, 66, 0.25);
+}
+
+.rounded-hsi {
+    border-radius: 20px;
+}
+
+/* Button */
+.btn-hsi-primary {
+    background-color: rgba(24, 30, 66, 1);
+    color: #fff;
+}
+
+.btn-hsi-primary:hover {
+    border-color: rgba(24, 30, 66, 1);
+    background-color: rgba(255, 255, 255, 1);
+    color: #181e42;
+}
+.btn-hsi-secondary {
+    background-color: rgba(1, 149, 165, 1);
+    color: #fff;
+}
+
+.btn-hsi-secondary:hover {
+    border-color: rgba(1, 149, 165, 1);
+    background-color: rgba(255, 255, 255, 1);
+    color: #0195a5;
+}
+
+/* Landing Page Style */
+.offcanvas {
+    background-color: rgba(255, 255, 255, 0.85);
+    /* backdrop-filter: blur(5px); */
+}
+.bg-main {
+    background-image: url(/assets/img/background/Background.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100svh;
+    width: 100svw;
+}
+
+/* Sidebar */
+.bg-hsi-primary {
+    background-color: #181e42 !important;
+}
+.bg-hsi-secondary {
+    background-color: #0195a5 !important;
+}
+
+.badge-secondary {
+    /* border: 1px solid;
+    border-color: rgba(241, 93, 75, 1); */
+    background-color: #0195a5;
+    color: #fff;
+}
