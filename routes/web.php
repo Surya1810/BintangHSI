@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/beranda', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/beranda/{code}', [BerandaController::class, 'index'])->name('beranda');
 
 // Profile Section
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

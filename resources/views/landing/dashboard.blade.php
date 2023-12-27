@@ -16,6 +16,9 @@
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,700,900' rel='stylesheet'>
 
+    <!-- Sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Favicons -->
 
     <!-- Scripts -->
@@ -108,104 +111,94 @@
         </div>
     </nav>
 
-    <main>
+    <main class="margin-top">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        {{-- if user login --}}
+                        @auth
+                            <img src="{{ asset('assets/img/profile/' . Auth::user()->avatar) }}"
+                                class="rounded-circle shadow mb-3" style="width: 150px;" alt="Profile"
+                                loading="lazy" />
 
-        @yield('content')
+                            <h5 class="mb-2 text-capitalize"><strong>{{ Auth::user()->name }}</strong></h5>
+                            <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p>
+                        @else
+                            {{-- if without login --}}
+                            <img src="{{ asset('assets/img/profile/' . $user->avatar) }}"
+                                class="rounded-circle shadow mb-3" style="width: 150px;" alt="Profile"
+                                loading="lazy" />
 
-    </main>
-
-    <footer style="width: 100svw;height: 50svh;">
-        <div class="container-fluid">
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 col-lg-8">
-                    <div class="card rounded-5 text-white bg-hsi-secondary">
-                        <div class="card-body p-5">
-                            <div class="row">
-                                <div class="col-12 col-md-7">
-                                    <h2 style="font-weight: 500">Nikmati Produk Berkualitas <br>
-                                        Bergabung Menjadi
-                                        Reseller
-                                        HSI</h2>
-                                    <small>Anda dapat menjadi Agen Reseller atau Distributor HSI, Pelajari produk dan
-                                        marketing Plan HSI</small>
-                                </div>
-                                <div class="col-12 col-md-5">
-                                    <button class="btn btn-light float-end p-3">Download Marketing Plan</button>
-                                </div>
-                            </div>
-                        </div>
+                            <h5 class="mb-2 text-capitalize"><strong>{{ $user->name }}</strong></h5>
+                            <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p>
+                        @endauth
                     </div>
                 </div>
             </div>
-            <ul class="nav justify-content-center">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Produk</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Tentang HSI</a>
-                </li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Testimonial</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Informasi</a></li>
-            </ul>
-            <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Company, Inc</p>
+        </section>
+    </main>
 
-                <ul class="nav col-md-4 d-flex justify-content-center">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Privacy
-                            Policy</a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Term &
-                            Condition</a>
-                    </li>
-                </ul>
-
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                    <li class="ms-3"><a class="text-body-secondary" href="#" style="color: black"><svg
-                                class="bi" width="24" height="24">
-                                <use xlink:href="#twitter" />
-                            </svg></a></li>
-                    <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi"
-                                width="24" height="24">
-                                <use xlink:href="#instagram" />
-                            </svg></a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+    <!-- Sweetalert2 -->
     <script>
-        //Back to Top Button
-        let mybutton = document.getElementById("btn-back-to-top");
-        let wabutton = document.getElementById("whatsapp");
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            iconColor: 'white',
+            customClass: {
+                popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        })
 
-        window.onscroll = function() {
-            scrollFunction();
-        };
+        @if (session('pesan'))
+            @switch(session('level-alert'))
+                @case('alert-success')
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
 
-        function scrollFunction() {
-            if (
-                document.body.scrollTop > 20 ||
-                document.documentElement.scrollTop > 20
-            ) {
-                mybutton.style.display = "block";
-                wabutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-                wabutton.style.display = "none";
-            }
-        }
-        // When the user clicks on the button, scroll to the top of the document
-        mybutton.addEventListener("click", backToTop);
+                @case('alert-danger')
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
 
-        function backToTop() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
+                @case('alert-warning')
+                Toast.fire({
+                    icon: 'warning',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @case('alert-question')
+                Toast.fire({
+                    icon: 'question',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @default
+                Toast.fire({
+                    icon: 'info',
+                    title: '{{ Session::get('pesan') }}'
+                })
+            @endswitch
+        @endif
+        @if (count($errors) > 0)
+            @foreach ($errors->all() as $error)
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ $error }}'
+                })
+            @endforeach
+        @endif
     </script>
-
-    @stack('scripts')
-
 </body>
 
 </html>

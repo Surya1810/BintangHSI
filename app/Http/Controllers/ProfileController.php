@@ -21,7 +21,6 @@ class ProfileController extends Controller
     {
         $user = User::find(Auth::id());
         $request->validate([
-            'username' => 'required|unique:users,username,' . $user->id,
             'name' => 'required|unique:users,name,' . $user->id,
             'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
@@ -30,7 +29,6 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
         $user->name = $request->name;
-        $user->username = $request->username;
         $user->email = $request->email;
         $user->update();
         return redirect()->back()->with(['pesan' => 'Profile updated successfully', 'level-alert' => 'alert-success']);
