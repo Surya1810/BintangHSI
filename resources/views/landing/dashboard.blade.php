@@ -32,7 +32,7 @@
 
 <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg border-bottom fixed-top bg-white" aria-label="Offcanvas navbar large">
+    {{-- <nav class="navbar navbar-expand-lg border-bottom fixed-top bg-white" aria-label="Offcanvas navbar large">
         <div class="container">
             <a class="navbar-brand my-2" href="{{ route('home') }}"> <img src="{{ asset('assets/logo/Logo Main.png') }}"
                     height="60" alt="HSI Logo" loading="lazy" /></a>
@@ -109,7 +109,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-    </nav>
+    </nav> --}}
 
     <main class="margin-top">
         <section>
@@ -119,16 +119,14 @@
                         {{-- if user login --}}
                         @auth
                             <img src="{{ asset('assets/img/profile/' . Auth::user()->avatar) }}"
-                                class="rounded-circle shadow mb-3" style="width: 150px;" alt="Profile"
-                                loading="lazy" />
+                                class="rounded-circle shadow mb-3" style="width: 150px;" alt="Profile" loading="lazy" />
 
                             <h5 class="mb-2 text-capitalize"><strong>{{ Auth::user()->name }}</strong></h5>
                             <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p>
                         @else
                             {{-- if without login --}}
-                            <img src="{{ asset('assets/img/profile/' . $user->avatar) }}"
-                                class="rounded-circle shadow mb-3" style="width: 150px;" alt="Profile"
-                                loading="lazy" />
+                            <img src="{{ asset('assets/img/profile/' . $user->avatar) }}" class="rounded-circle shadow mb-3"
+                                style="width: 150px;" alt="Profile" loading="lazy" />
 
                             <h5 class="mb-2 text-capitalize"><strong>{{ $user->name }}</strong></h5>
                             <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p>
